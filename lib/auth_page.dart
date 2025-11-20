@@ -124,7 +124,11 @@ Widget build(BuildContext context) {
   // We use LayoutBuilder to determine the height available to the body.
   // This allows the SingleChildScrollView to fill the height and apply vertical centering.
   return Scaffold(
-    appBar: AppBar(title: Text(_isLogin ? 'Login' : 'Register')),
+    appBar: AppBar(
+      title: Text(_isLogin ? 'Login' : 'Register'),
+      backgroundColor: Colors.white,
+      ),
+    backgroundColor: Colors.white,
     body: LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
@@ -242,6 +246,9 @@ Widget build(BuildContext context) {
                           : ElevatedButton(
                               onPressed: _submit,
                               child: Text(_isLogin ? 'Login' : 'Register'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue, 
+                              ),
                             ),
                     ),
 
