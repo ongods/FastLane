@@ -1,0 +1,43 @@
+name: Bug Report
+description: Report a problem or unexpected behavior
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the issue.
+      placeholder: The app crashes when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: List the steps that lead to the issue.
+      placeholder: |
+        1. Go to...
+        2. Click...
+        3. Observe failure
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      placeholder: What should have happened instead?
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Screenshots
+      description: Attach any logs or images that help diagnose the issue.
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: OS, Browser, Version, etc.
