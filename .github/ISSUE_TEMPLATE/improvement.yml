@@ -1,0 +1,25 @@
+name: Improvement / Refactor
+description: Suggest code or workflow improvements
+title: "[IMPROVEMENT] "
+labels: ["refactor"]
+body:
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Issue
+      description: What needs improvement?
+      placeholder: The code in X is too complex...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Changes
+      placeholder: Rewrite module Y to...
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Why This Helps
+      placeholder: Clearer code, better performance, etc.

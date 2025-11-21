@@ -1,0 +1,33 @@
+name: Feature Request
+description: Suggest a new feature
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Context
+      description: What issue does this feature solve?
+      placeholder: I'm trying to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Describe the feature you want.
+      placeholder: The app should allow...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      placeholder: Other ideas you thought about.
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
