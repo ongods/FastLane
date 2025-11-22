@@ -1,15 +1,7 @@
-/*
-  REFACTORED AUTH PAGE (auth_page.dart)
-    - UI Presentation for Login and Register Page.
-    - All Firebase/Firestore logic has been moved to auth_service.dart.
 
-    Lead Author: Vince Evangelista 
-    Contributor/s: Prince Pamintuan
-    Created on: November 20, 2025
-*/
 import 'package:flutter/material.dart';
 import 'home_page.dart';
-import '../auth/auth_service.dart'; // Ensure this import path is correct
+import '../data/auth_service.dart';
 
 // Enum to manage the three distinct states of the authentication screen
 enum AuthMode { login, register, forgotPassword }
