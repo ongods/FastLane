@@ -54,9 +54,7 @@ class RegisterPage extends StatelessWidget {
                       icon: Icons.lock_outline,
                       obscure: !c.passwordVisible,
                       suffix: IconButton(
-                        icon: Icon(
-                          c.passwordVisible ? Icons.visibility : Icons.visibility_off,
-                        ),
+                        icon: Icon(c.passwordVisible ? Icons.visibility : Icons.visibility_off),
                         onPressed: () {
                           c.passwordVisible = !c.passwordVisible;
                           c.notifyListeners();
@@ -70,9 +68,7 @@ class RegisterPage extends StatelessWidget {
                       icon: Icons.lock_reset_outlined,
                       obscure: !c.confirmPasswordVisible,
                       suffix: IconButton(
-                        icon: Icon(
-                          c.confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                        ),
+                        icon: Icon(c.confirmPasswordVisible ? Icons.visibility : Icons.visibility_off),
                         onPressed: () {
                           c.confirmPasswordVisible = !c.confirmPasswordVisible;
                           c.notifyListeners();
@@ -103,7 +99,7 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/login');
+                        Navigator.pushReplacementNamed(context, '/login');
                       },
                       child: const Text('Already have an account? Log In'),
                     ),
