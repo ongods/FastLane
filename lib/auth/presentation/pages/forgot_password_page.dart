@@ -12,41 +12,47 @@ class ForgotPasswordPage extends StatelessWidget {
       create: (_) => AuthController()..mode = AuthMode.forgotPassword,
       child: Consumer<AuthController>(
         builder: (_, c, __) => Scaffold(
-          appBar: AppBar(title: const Text('Reset Password')),
+          appBar: AppBar(title: const Text('Forgot Password')),
           body: Center(
-            child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 20),
                   AuthTextField(
                     controller: c.email,
                     label: 'Email',
                     icon: Icons.email_outlined,
                     keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.done,
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final error = await c.submit();
-                      if (error != null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(error)),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Password reset link sent to ${c.email.text}'),
-                          ),
-                        );
-                        c.toggleForgotPassword(); // Back to login
-                      }
-                    },
-                    child: const Text('SEND RESET LINK'),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: c.loading
+                          ? null
+                          : () async {
+                              final error = await c.submit();
+                              if (error != null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(content: Text(error)));
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(content: Text('Password reset link sent.')));
+                                Navigator.pushReplacementNamed(context, '/login');
+                              }
+                            },
+                      child: c.loading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text('SEND RESET LINK'),
+                    ),
                   ),
+                  const SizedBox(height: 10),
                   TextButton(
-                    onPressed: c.toggleForgotPassword,
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/login');
+                    },
                     child: const Text('Back to Login'),
                   ),
                 ],

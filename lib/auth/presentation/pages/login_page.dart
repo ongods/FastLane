@@ -14,51 +14,70 @@ class LoginPage extends StatelessWidget {
         builder: (_, c, __) => Scaffold(
           appBar: AppBar(title: const Text('Login')),
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AuthTextField(
-                  controller: c.email,
-                  label: 'Email',
-                  icon: Icons.email_outlined,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(height: 15),
-                AuthTextField(
-                  controller: c.password,
-                  label: 'Password',
-                  icon: Icons.lock_outline,
-                  obscure: !c.passwordVisible,
-                  suffix: IconButton(
-                    icon: Icon(c.passwordVisible ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      c.passwordVisible = !c.passwordVisible;
-                      c.notifyListeners();
-                    },
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AuthTextField(
+                    controller: c.email,
+                    label: 'Email',
+                    icon: Icons.email_outlined,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                   ),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () async {
-                    final error = await c.submit();
-                    if (error != null) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
-                    } else {
-                      // Navigate to home
-                    }
-                  },
-                  child: const Text('LOGIN'),
-                ),
-                TextButton(
-                  onPressed: c.toggleForm,
-                  child: const Text('Need an account? Register'),
-                ),
-                TextButton(
-                  onPressed: c.toggleForgotPassword,
-                  child: const Text('Forgot Password?'),
-                ),
-              ],
+                  const SizedBox(height: 15),
+                  AuthTextField(
+                    controller: c.password,
+                    label: 'Password',
+                    icon: Icons.lock_outline,
+                    obscure: !c.passwordVisible,
+                    suffix: IconButton(
+                      icon: Icon(
+                        c.passwordVisible ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        c.passwordVisible = !c.passwordVisible;
+                        c.notifyListeners();
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: c.loading
+                          ? null
+                          : () async {
+                              final error = await c.submit();
+                              if (error != null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(content: Text(error)));
+                              } else {
+                                Navigator.pushReplacementNamed(context, '/home');
+                              }
+                            },
+                      child: c.loading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text('LOGIN'),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/register');
+                    },
+                    child: const Text('Need an account? Register'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/forgot-password');
+                    },
+                    child: const Text('Forgot Password?'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
