@@ -1,36 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-import 'core/firebase_options.dart';
-import 'app/router/app_router.dart';
-import 'app/theme/app_theme.dart';
+class AppTheme {
+  // LIGHT THEME
+  static ThemeData light() {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.blue,
+        brightness: Brightness.light, // REQUIRED
+      ),
+    );
+  }
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FastLane',
-      debugShowCheckedModeBanner: false,
-
-      // Theme Setup
-      theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
-      themeMode: ThemeMode.light,
-
-      // Routing
-      initialRoute: '/login',
-      onGenerateRoute: AppRouter.generateRoute,
+  // DARK THEME
+  static ThemeData dark() {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.blue,
+        brightness: Brightness.dark, // REQUIRED
+      ),
     );
   }
 }
